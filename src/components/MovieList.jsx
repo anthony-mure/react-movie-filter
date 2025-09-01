@@ -14,10 +14,17 @@ const moviesList = [
 const MovieList = () => {
 
 const [filteredMovies, setFilteredMovies] = useState(moviesList);
+const [genre, setGenre] = useState('');
+
+useEffect(() => {
+  const filtered = genre ? moviesList.filter(movie => movie.genre === genre) : [...moviesList];
+   
+  setFilteredMovies(filtered);
+}, [genre]);
 
   return (
     <div className='col-12 ms-5'>
-      <select>
+      <select onChange={(e) => setGenre(e.target.value)}>
         <option value="">seleziona genere</option>
         <option value="Fantascienza">Fantascienza</option>
         <option value="Thriller">Thriller</option>
@@ -26,7 +33,7 @@ const [filteredMovies, setFilteredMovies] = useState(moviesList);
       </select>
       <ul className='mt-3'>
         {filteredMovies.map((movie, id) =>(
-          <li key={id}>{movie.title}{movie.genre}</li>
+          <li key={id}>{movie.title}</li>
         ))}
       </ul>
     </div>

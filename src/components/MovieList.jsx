@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 
-const movieList = [
+const moviesList = [
 { title: 'Inception', genre: 'Fantascienza' },
 { title: 'Il Padrino', genre: 'Thriller' },
 { title: 'Titanic', genre: 'Romantico' },
@@ -12,6 +12,9 @@ const movieList = [
 ]
 
 const MovieList = () => {
+
+const [filteredMovies, setFilteredMovies] = useState(moviesList);
+
   return (
     <div className='col-12 ms-5'>
       <select>
@@ -21,9 +24,14 @@ const MovieList = () => {
         <option value="Romantico">Romantico</option>
         <option value="Azione">Azione</option>
       </select>
+      <ul className='mt-3'>
+        {filteredMovies.map((movie, id) =>(
+          <li key={id}>{movie.title}{movie.genre}</li>
+        ))}
+      </ul>
     </div>
     
-  )
-}
+  );
+};
 
 export default MovieList
